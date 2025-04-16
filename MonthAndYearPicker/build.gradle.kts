@@ -38,9 +38,9 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.github.hirensorathiya2022"
             artifactId = "MonthAndYearPicker"
-            version = "1.0.0"
+            version = "1.0.1"
             pom {
-                description.set("Created Month And year picker library")
+                description.set("Update a ")
             }
         }
     }
