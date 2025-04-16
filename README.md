@@ -6,9 +6,15 @@ Month and Year Picker allow user to pick only month and year or only month or on
 
 ## Sample Project output:
 
-![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/sample/src/main/res/raw/datepicker.gif?raw=true "Month and Year Picker") ![MonthAndYearPicker](https://j.gifs.com/nZpE4P.gif?raw=true "Choose Month") ![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/sample/src/main/res/raw/choose_year.gif?raw=true "Choose Year") ![MonthAndYearPicker](https://j.gifs.com/LgoKEv.gif?raw=true "Choose Quantity")
+![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/app/src/main/res/raw/datepicker.gif?raw=true "Month and Year Picker") ![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/app/src/main/res/raw/choose_month.gif?raw=true "Choose Month") ![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/app/src/main/res/raw/choose_year.gif?raw=true "Choose Year") ![MonthAndYearPicker](https://github.com/hirensorathiya2022/MonthAndYearPicker/blob/master/app/src/main/res/raw/choose_quantity.gif?raw=true "Choose Quantity")
 
+## Usage 
 
+Add Gradle Dependency in your build.gradle file
+
+    implementation("com.github.hirensorathiya2022:MonthAndYearPicker:1.0.0")
+
+    
 # Code
 
      MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, 
@@ -79,11 +85,4 @@ Month and Year picker by default pick the color from theme if you declared color
 
         <item name="dialogActionButtonColor">@color/colorAccent</item>
     </style>
-
-
-## Usage 
-
-Add Gradle Dependency in your build.gradle file
-
-    implementation("com.github.hirensorathiya2022:MonthAndYearPicker:1.0.0")
   
