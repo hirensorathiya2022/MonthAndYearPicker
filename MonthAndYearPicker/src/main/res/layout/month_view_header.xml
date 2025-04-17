@@ -14,35 +14,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@android:color/primary_text_dark_nodisable"
         android:textSize="16sp"
-        android:visibility="gone"
-        android:textColor="@android:color/primary_text_dark_nodisable"/>
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
         android:gravity="center">
 
         <TextView
             android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="10dp"
-            tools:text="@string/label_month"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/primary_text_dark_nodisable"
             android:textSize="35sp"
-            android:textColor="@android:color/primary_text_dark_nodisable"/>
+            tools:text="@string/label_month" />
 
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="30dp"
-            tools:text="@string/label_year"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/primary_text_dark_nodisable"
             android:textSize="35sp"
-            android:textColor="@android:color/primary_text_dark_nodisable"/>
+            android:visibility="visible"
+            tools:text="@string/label_year" />
     </LinearLayout>
 </LinearLayout>

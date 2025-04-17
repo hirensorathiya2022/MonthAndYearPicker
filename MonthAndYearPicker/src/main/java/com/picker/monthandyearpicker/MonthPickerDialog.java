@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
+import android.widget.TextView;
 
 import androidx.annotation.IntRange;
 import androidx.appcompat.app.AlertDialog;
@@ -33,8 +36,9 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     private MonthPickerDialog(Context context,
                               OnDateSetListener callBack,
                               int year,
-                              int monthOfYear) {
-        this(context, 0, callBack, year, monthOfYear);
+                              int monthOfYear, String positiveButtonText,
+                              String negativeButtonText) {
+        this(context, 0, callBack, year, monthOfYear, positiveButtonText, negativeButtonText);
     }
 
 
@@ -56,7 +60,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                 }
 
                 return;
-            }else {
+            } else {
                 dismiss();
             }
         }
@@ -74,7 +78,9 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                               int theme,
                               OnDateSetListener callBack,
                               int year,
-                              int monthOfYear) {
+                              int monthOfYear,
+                              String positiveButtonText,
+                              String negativeButtonText) {
         super(context, theme);
         _callBack = callBack;
         LayoutInflater inflater = (LayoutInflater) context
@@ -83,6 +89,19 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
 
         setView(view);
         _monthPicker = (MonthPickerView) view.findViewById(R.id.monthPicker);
+
+        // Set the text for the positive (OK) button
+        TextView positiveButton = _monthPicker.findViewById(R.id.ok_action);
+        if (positiveButton != null) {
+            positiveButton.setText(positiveButtonText);
+        }
+
+        // Set the text for the negative (Cancel) button
+        TextView negativeButton = _monthPicker.findViewById(R.id.cancel_action);
+        if (negativeButton != null) {
+            negativeButton.setText(negativeButtonText);
+        }
+
         _monthPicker.setOnDateListener(new MonthPickerView.OnDateSet() {
             @Override
             public void onDateSet() {
@@ -141,7 +160,6 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
     protected void onStop() {
         super.onStop();
     }
-
 
     private void setMinMonth(int minMonth) {
         _monthPicker.setMinMonth(minMonth);
@@ -205,6 +223,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         private MonthPickerDialog monthPickerDialog;
         private OnYearChangedListener _onYearChanged;
         private OnMonthChangedListener _onMonthChanged;
+        private String positiveButtonText;
+        private String negativeButtonText;
 
 
         /**
@@ -254,6 +274,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
                 _maxYear = MonthPickerView._maxYear;
             }
 
+            positiveButtonText = context.getString(android.R.string.ok);
+            negativeButtonText = context.getString(android.R.string.cancel);
 
         }
 
@@ -265,7 +287,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return Builder
          */
         public Builder setMinMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                           int minMonth) {
+                                   int minMonth) {
             if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER) {
                 this._minMonth = minMonth;
                 return this;
@@ -283,7 +305,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return
          */
         public Builder setMaxMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                           int maxMonth) {
+                                   int maxMonth) {
             /* if (maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {*/
             this._maxMonth = maxMonth;
             return this;
@@ -324,7 +346,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return Builder
          */
         public Builder setActivatedMonth(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                                 int activatedMonth) {
+                                         int activatedMonth) {
             this._activatedMonth = activatedMonth;
             return this;
         }
@@ -351,9 +373,9 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return Builder
          */
         public Builder setMonthRange(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                             int minMonth,
+                                     int minMonth,
                                      @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                             int maxMonth) {
+                                     int maxMonth) {
             if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER &&
                     maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {
                 this._minMonth = minMonth;
@@ -393,9 +415,9 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
          * @return
          */
         public Builder setMonthAndYearRange(@IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                                    int minMonth,
+                                            int minMonth,
                                             @IntRange(from = Calendar.JANUARY, to = Calendar.DECEMBER)
-                                                    int maxMonth,
+                                            int maxMonth,
                                             int minYear, int maxYear) {
             if (minMonth >= Calendar.JANUARY && minMonth <= Calendar.DECEMBER &&
                     maxMonth >= Calendar.JANUARY && maxMonth <= Calendar.DECEMBER) {
@@ -458,6 +480,19 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
             return this;
         }
 
+        /*Set the positive button text to the picker.*/
+        public Builder setPositiveButtonText(String text) {
+            this.positiveButtonText = text;
+            return this;
+        }
+
+        /*Set the negative button text to the picker.*/
+        public Builder setNegativeButtonText(String text) {
+            this.negativeButtonText = text;
+            return this;
+        }
+
+
         /**
          * Sets the callback that will be called when user click on any month.
          *
@@ -504,7 +539,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
 
 
             monthPickerDialog = new MonthPickerDialog(_context, _callBack, _activatedYear,
-                    _activatedMonth);
+                    _activatedMonth, positiveButtonText, negativeButtonText);
             if (monthOnly) {
                 monthPickerDialog.showMonthOnly();
                 _minYear = 0;
@@ -534,6 +569,12 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
             if (title != null) {
                 monthPickerDialog.setMonthPickerTitle(title.trim());
             }
+
+            /*if (positiveButtonText != null) {
+                monthPickerDialog.setButton(BUTTON_POSITIVE, (CharSequence) positiveButtonText, null);
+            }*/
+
+
             return monthPickerDialog;
         }
     }
@@ -572,7 +613,7 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         void onYearChanged(int year);
     }
 
-    public interface OnConfigChangeListener{
+    public interface OnConfigChangeListener {
 
         void onConfigChange();
     }

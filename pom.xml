@@ -2,7 +2,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.hirensorathiya2022</groupId>
     <artifactId>MonthAndYearPicker</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
-        <description>Created Month And year picker library</description>
+        <description>MonthAndYearPicker_1.0.2v
+            1.Update a UI-UX Design of month and year picker view.
+            2.Implement a button name update option on MonthPicker Dialog.</description>
 </project>

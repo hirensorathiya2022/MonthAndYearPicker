@@ -38,9 +38,11 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.github.hirensorathiya2022"
             artifactId = "MonthAndYearPicker"
-            version = "1.0.1"
+            version = "1.0.2"
             pom {
-                description.set("Update a ")
+                description.set("MonthAndYearPicker_1.0.2v\n" +
+                        "1.Update a UI-UX Design of month and year picker view.\n" +
+                        "2.Implement a button name update option on MonthPicker Dialog.")
             }
         }
     }
